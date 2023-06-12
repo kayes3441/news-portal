@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('parent_id')->default(0);
             $table->integer('priority')->default(1);
-            $table->integer('position');
+            $table->integer('position')->default(1);
             $table->integer('status')->default(0);
             $table->text('logo')->nullable();
             $table->timestamps();

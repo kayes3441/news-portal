@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\CPU\ImageManager;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Validator;
@@ -20,18 +21,15 @@ class CategoryController extends Controller
         if ($validator->fails()){
             return response()->json(['success'=>false,'message'=>$validator->errors()]);
         }
-
-
-        $image      = $request->file('logo');
-        $imageName  = $image->getClientOriginalName();
-        $directory  = 'Category-Images/';
-        $image      -> move($directory,$imageName);
+        $image_name = [];
+        if($request->has('logo')){
+            $image_name = ImageManager::upload('category/','png',$request->file('logo'));
+        }
        Category::create([
            'name'     => $request->name,
            'priority' => $request->priority,
-           'logo'     => $directory.$imageName,
+           'logo'     => $image_name,
        ]);
-
-       return redirect()->back()->with('message','Category Create Successfully');
+       return redirect()->back()->with('message.success','Category Create Successfully');
     }
 }

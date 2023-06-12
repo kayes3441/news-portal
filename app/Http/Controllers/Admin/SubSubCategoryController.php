@@ -36,15 +36,15 @@ class SubSubCategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'message' => $validator->errors()]);
         }
-        $image = $request->file('logo');
-        $imageName = $image->getClientOriginalName();
-        $directory = 'SubSubCategory-Images/';
-        $image->move($directory, $imageName);
+        $image_name = []
+        if($request->has('logo')){
+            $image_name = ImageManager::upload('category/','png',$request->file('logo'));
+        }
         Category::create([
             'name' => $request->name,
             'parent_id'=>$request->sub_category,
             'priority' => $request->priority,
-            'logo' => $directory . $imageName,
+            'logo' => $image_name,
         ]);
 
         return redirect()->back()->with('message', 'Sub Category Create Successfully');

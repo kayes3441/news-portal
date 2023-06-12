@@ -23,6 +23,8 @@
     "autoload": {
         "files": [
             "app/CPU/image-manager.php"
+
+            
         ],
         "psr-4": {
             "App\\": "app/",

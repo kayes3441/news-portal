@@ -30,6 +30,7 @@ class CategoryController extends Controller
            'priority' => $request->priority,
            'logo'     => $image_name,
        ]);
+       
        return redirect()->back()->with('message.success','Category Create Successfully');
     }
 }

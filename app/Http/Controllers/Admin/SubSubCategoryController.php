@@ -36,7 +36,7 @@ class SubSubCategoryController extends Controller
         if ($validator->fails()) {
             return response()->json(['success' => false, 'message' => $validator->errors()]);
         }
-        $image_name = []
+        $image_name = [];
         if($request->has('logo')){
             $image_name = ImageManager::upload('category/','png',$request->file('logo'));
         }

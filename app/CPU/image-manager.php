@@ -8,6 +8,10 @@ use Intervention\Image\Facades\Image;
 
 class ImageManager
 {
+    /**
+     * image upload function 
+     * using static for call this fucntion from anywhere  
+     */
     public static function upload(string $dir, string $format, $image = null)
     {
         if ($image != null) {

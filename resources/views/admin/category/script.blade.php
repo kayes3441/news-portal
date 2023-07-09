@@ -1,12 +1,19 @@
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
-<script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
-
 <script>
-    $(document).ready( function () {
-        //alert('ok');
-        $('#datatable').DataTable();
-    } );
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+            $('#blah').attr('src', e.target.result).width(160).height(160);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function change_status(){
+    }
 </script>
+
 
 
 

@@ -5,32 +5,48 @@ use App\Http\Controllers\Controller;
 use App\CPU\ImageManager;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 class CategoryController extends Controller
 {
+    public function __construct(
+        private  Category $category
+    ){
 
-
-    public function index(){
-        return view('admin.category.index');
     }
-    public function create(Request $request){
+
+    public function index(Request $request){
+        $query_peram = [];
+        if($request->has('search')){
+            $query_peram = $request->search;
+        }
+        $categories = $this->category->when($request->has('search'),function($query)use($request){
+            return $query->where('name','LIKE','%'.$request->search.'%');
+        })->where('position',0)->paginate(15)->appends($query_peram);
+        return view('admin.category.index',compact('categories'));
+    }
+    public function sotre(Request $request){
        $validator = Validator::make($request->all(),[
            'name'       =>'required',
            'priority'   => 'required',
        ]);
         if ($validator->fails()){
-            return response()->json(['success'=>false,'message'=>$validator->errors()]);
+            return back()->withErrors($validator)->withInput();
         }
-        $image_name = [];
+        $image_name = "";
         if($request->has('logo')){
             $image_name = ImageManager::upload('category/','png',$request->file('logo'));
         }
-       Category::create([
+       DB::table('categories')->create([
            'name'     => $request->name,
            'priority' => $request->priority,
            'logo'     => $image_name,
        ]);
-       
+
        return redirect()->back()->with('message.success','Category Create Successfully');
     }
+    public function show(){
+
+    }
+
 }

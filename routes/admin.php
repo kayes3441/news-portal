@@ -9,7 +9,6 @@ use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
 Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function (){
-
     Route::get('/login-form',[AdminController::class,'loginForm'])->name('login-form');
     Route::post('/login',[AdminController::class,'login'])->name('login');
     Route::get('/reset-password-form',[AdminController::class,'resetPasswordForm'])->name('reset-password-form');
@@ -21,17 +20,17 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
         Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
         Route::get('/logout',[AdminController::class,'logout'])->name('logout');
 
-        Route::controller(CategoryController::class)->group(function (){
-            Route::get('/category/index','index')->name('category.index');
-            Route::post('/category/create','create')->name('category.create');
+        Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function (){
+            Route::get('/','index')->name('index');
+            Route::post('/sotre','sotre')->name('store');
         });
 
         Route::controller(SubCategoryController::class)->group(function (){
-            Route::get('/sub-category/index','index')->name('sub-category.index');
+            Route::get('/sub-category','index')->name('sub-category.index');
             Route::post('/sub-category/create','create')->name('sub-category.create');
         });
         Route::controller(SubSubCategoryController::class)->group(function (){
-            Route::get('/sub-sub-category/index','index')->name('sub-sub-category.index');
+            Route::get('/sub-sub-category','index')->name('sub-sub-category.index');
             Route::get('/sub_sub-category/get-sub-category','getSubCategory')->name('sub-sub-category.get-sub-category');
             Route::post('/sub-sub-category/create','create')->name('sub-sub-category.create');
         });

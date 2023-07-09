@@ -5,7 +5,7 @@
 <script src="{{asset('/')}}admin/assets/libs/simplebar/simplebar.min.js"></script>
 <script src="{{asset('/')}}admin/assets/libs/node-waves/waves.min.js"></script>
 
-<script src="{{asset('/')}}admin/assets/js/toastr.min.js"></script>
+<script src="{{asset('/')}}admin/assets/js/toastr.js"></script>
 <!-- apexcharts -->
 <script src="{{asset('/')}}admin/assets/libs/apexcharts/apexcharts.min.js"></script>
 
@@ -17,8 +17,9 @@
 
 <script>
     @if(Session::has('message.success'))
-    toastr.options =
-        {
+    let success_message = "{{ Session::get('message.success') }}";
+        Command: toastr["success"](success_message);
+        toastr.options = {
             "closeButton": false,
             "debug": false,
             "newestOnTop": false,
@@ -35,8 +36,30 @@
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
         }
-    toastr.success("{{ Session::get('message.success')}}");
     @endif
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            Command: toastr["error"]("Failed !!","{{$error}}")
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": false,
+                "positionClass": "toast-bottom-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "300",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+        @endforeach
+    @endif
+
 </script>
 
 

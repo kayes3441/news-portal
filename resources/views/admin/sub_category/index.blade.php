@@ -1,6 +1,6 @@
 @extends('layout.admin.master')
-@section('title') Sub Category  @endsection
-@section('doc-title') Sub Category  @endsection
+@section('title') Category  @endsection
+@section('doc-title') Category  @endsection
 @section('add-css')
     <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -87,7 +87,7 @@
                 <div class="card-body">
                     <h4 class="card-title">Sub Category Table</h4>
                     {{--                        <h6 class="text-success text-center">{{Session::get('message')}}</h6>--}}
-                    @include('admin.sub_category.table')
+                    @include('admin.banner.table')
                 </div>
             </div>
         </div>

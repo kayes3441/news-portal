@@ -23,6 +23,9 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
         Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function (){
             Route::get('/','index')->name('index');
             Route::post('/sotre','sotre')->name('store');
+            Route::post('/edit/{id}','edit')->name('edit');
+            Route::post('/update/{id}','edit')->name('edit');
+            Route::post('/status-update','status_update')->name('status_update');
         });
 
         Route::controller(SubCategoryController::class)->group(function (){

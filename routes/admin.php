@@ -8,7 +8,11 @@ use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\PostController;
+
+
+
 Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function (){
+    
     Route::get('/login-form',[AdminController::class,'loginForm'])->name('login-form');
     Route::post('/login',[AdminController::class,'login'])->name('login');
     Route::get('/reset-password-form',[AdminController::class,'resetPasswordForm'])->name('reset-password-form');

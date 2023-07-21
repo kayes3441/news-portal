@@ -12,7 +12,7 @@ use App\Http\Controllers\Admin\PostController;
 
 
 Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function (){
-    
+
     Route::get('/login-form',[AdminController::class,'loginForm'])->name('login-form');
     Route::post('/login',[AdminController::class,'login'])->name('login');
     Route::get('/reset-password-form',[AdminController::class,'resetPasswordForm'])->name('reset-password-form');
@@ -31,17 +31,21 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::post('/update/{id}','edit')->name('edit');
             Route::post('/status-update','status_update')->name('status_update');
         });
-
-        Route::controller(SubCategoryController::class)->group(function (){
-            Route::get('/sub-category','index')->name('sub-category.index');
-            Route::post('/sub-category/create','create')->name('sub-category.create');
+        Route::controller(SubCategoryController::class)->prefix('sub-category')->name('sub-category.')->group(function (){
+            Route::get('/','index')->name('index');
+            Route::post('/sotre','sotre')->name('store');
+            Route::post('/edit/{id}','edit')->name('edit');
+            Route::post('/update/{id}','edit')->name('edit');
+            Route::post('/status-update','status_update')->name('status_update');
         });
-        Route::controller(SubSubCategoryController::class)->group(function (){
-            Route::get('/sub-sub-category','index')->name('sub-sub-category.index');
-            Route::get('/sub_sub-category/get-sub-category','getSubCategory')->name('sub-sub-category.get-sub-category');
-            Route::post('/sub-sub-category/create','create')->name('sub-sub-category.create');
+        Route::controller(SubSubCategoryController::class)->prefix('sub-sub-category')->name('sub-sub-category.')->group(function (){
+            Route::get('/','index')->name('index');
+            Route::get('/get-sub-category','get_sub_category')->name('get-sub-category');
+            Route::post('/sotre','sotre')->name('store');
+            Route::post('/edit/{id}','edit')->name('edit');
+            Route::post('/update/{id}','edit')->name('edit');
+            Route::post('/status-update','status_update')->name('status_update');
         });
-
         Route::controller(BannerController::class)->group(function (){
             Route::get('/banner/index','index')->name('banner.index');
             Route::get('/banner/banner-form','bannerForm')->name('banner.banner-form');

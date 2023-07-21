@@ -16,4 +16,14 @@ class Category extends Model
         'parent_id'
     ];
 
+    public function parent()
+    {
+        return $this->belongsTo(Category::class, 'parent_id')->orderBy('priority','desc');
+    }
+
+    public function childes()
+    {
+        return $this->hasMany(Category::class, 'parent_id')->orderBy('priority','asc');
+    }
+
 }

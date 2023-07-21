@@ -37,7 +37,7 @@ class CategoryController extends Controller
         if($request->has('logo')){
             $image_name = ImageManager::upload('category/','png',$request->file('logo'));
         }
-       DB::table('categories')->create([
+       DB::table('categories')->insert([
            'name'     => $request->name,
            'priority' => $request->priority,
            'logo'     => $image_name,

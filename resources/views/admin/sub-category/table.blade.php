@@ -4,20 +4,22 @@
         <tr class="text-center">
             <th>Sl</th>
             <th>Name</th>
+            <th>Category</th>
             <th>Priority</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
         </thead>
         <tbody>
-            @foreach ($categories as $key=>$category)
+            @foreach ($sub_categories as $key=>$sub_category)
                 <tr class="table-light text-center ">
-                    <td>{{$categories->firstItem()+$key}}</td>
-                    <td>{{$category['name']}}</td>
-                    <td>{{$category['priority']}}</td>
+                    <td>{{$sub_categories->firstItem()+$key}}</td>
+                    <td>{{$sub_category['name']}}</td>
+                    <td>{{$sub_category->parent['name']}}</td>
+                    <td>{{$sub_category['priority']}}</td>
                     <td>
                         <div class="form-check form-switch d-flex justify-content-center">
-                            <input class="form-check-input" type="checkbox" onchange="change_status()" id="status_check" {{$category['status'] == 1 ? 'checked' : ''}}>
+                            <input class="form-check-input" type="checkbox" onchange="change_status()" id="status_check" {{$sub_category['status'] == 1 ? 'checked' : ''}}>
                         </div>
                     </td>
                     <td >
@@ -38,6 +40,6 @@
 
  <!-- Pagination -->
 <div class="mt-4 d-flex justify-content-center">
-     {!!$categories->links()!!}
+     {!!$sub_categories->links()!!}
 </div>
 <!-- End Pagination -->

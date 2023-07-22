@@ -42,6 +42,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map(){
         $this->mapAdminRoutes();
+        $this->mapWebRoutes();
     }
 
     /**
@@ -57,6 +58,13 @@ class RouteServiceProvider extends ServiceProvider
             ->namespace($this->namespace)
             ->group(base_path('routes/admin.php'));
     }
+    protected function mapWebRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web.php'));
+    }
+
 
     /**
      * Configure the rate limiters for the application.

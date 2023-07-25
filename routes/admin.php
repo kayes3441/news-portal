@@ -7,9 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\TagController;
-use App\Http\Controllers\Admin\PostController;
-
-
+use App\Http\Controllers\Admin\NewsController;
 
 Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function (){
 
@@ -55,12 +53,10 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::get('/tag/index','index')->name('tag.index');
             Route::any('/tag/create','create')->name('tag.create');
         });
-        Route::controller(PostController::class)->group(function (){
-            Route::get('/post/index','index')->name('post.index');
-            Route::get('/post/post-form','postForm')->name('post.post-form');
-            Route::get('/post/get-sub-category','getSubCategory')->name('post.get-sub-category');
-            Route::get('/post/get-sub-sub-category','getSubSubCategory')->name('post.get-sub-sub-category');
-            Route::any('/post/create','create')->name('post.create');
+        Route::controller(NewsController::class)->prefix('news')->name('news.')->group(function (){
+            Route::get('/','index')->name('index');
+            Route::get('/add-news','add_news')->name('add-news');
+            Route::post('/store','sotre')->name('store');
         });
     });
 

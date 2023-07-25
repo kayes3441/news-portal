@@ -13,9 +13,8 @@ return new class extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
-            $table->smallInteger('category_id');
-            $table->string('name');
-            $table->string('slug');
+            $table->foreignId('news_id');
+            $table->text('tags');
             $table->timestamps();
         });
     }

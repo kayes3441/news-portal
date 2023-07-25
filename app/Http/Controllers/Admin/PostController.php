@@ -15,41 +15,9 @@ class PostController extends Controller
     public function index(){
         return view('admin.post.index');
     }
-    public function postForm(){
-        return view('admin.post.post-form',[
-            'categories' => Category::where('parent_id','=',0)->get()
-        ]);
-    }
-    public function getSubCategory(Request $request){
-       // return 'hu';
-        $category_id      = $request->id;
-        $sub_categories   = Category::where('parent_id',$category_id)->get();
-        $option           = ['<option value="" selected disabled>--Select Sub Category--</option>'];
-        foreach ($sub_categories  as $value){
-            $option[]     = '<option value="'.$value->id.'">'.$value->name.'</option>';
-        }
-        $tags             = Tag::where('category_id',$category_id)->get();
-
-        $tag_option       = ['<option value="" disabled>--Select Tag--</option>'];
-        foreach ($tags  as $value){
-            $tag_option[] = '<option value="'.$value->id.'">'.$value->name.'</option>';
-        }
 
 
-        return response()->json(['success'=>true,'content'=>$option,'tag'=>$tag_option]);
-    }
-    public function getSubSubCategory(Request $request){
-//        return 'hi';
-        $sub_category_id    = $request->id;
-        $sub_sub_categories = Category::where('parent_id',$sub_category_id)->get();
-        $option             = ['<option value="" selected disabled>--Select Sub Sub Category--</option>'];
-        foreach ($sub_sub_categories  as $value){
-            $option[]       = '<option value="'.$value->id.'">'.$value->name.'</option>';
-        }
-        return response()->json(['success'=>true,'content'=>$option]);
-    }
-
-    public function create(Request $request){
+    public function store(Request $request){
         //return $request->all();
         $validator = Validator::make($request->all(),[
             'name'                => 'required',

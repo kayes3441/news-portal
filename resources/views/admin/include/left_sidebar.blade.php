@@ -67,6 +67,16 @@
                         <li><a href="{{route('admin.sub-sub-category.index')}}" key="t-tui-calendar">Sub Sub Categories</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-news"></i>
+                        <span key="t-dashboards">News Setup</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('admin.news.index')}}" key="t-tui-calendar">All News</a></li>
+
+                    </ul>
+                </li>
 
                 <li>
                     <a href="chat.html" class="waves-effect">

@@ -57,6 +57,12 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::get('/','index')->name('index');
             Route::get('/add-news','add_news')->name('add-news');
             Route::post('/store','sotre')->name('store');
+            Route::post('/news-type-store','news_type_store')->name('news-type-store');
+            Route::get('/trending-news','trending_news')->name('trending-news');
+            Route::get('/feature-news','feature_news')->name('feature-news');
+            Route::get('/pending-news','pending_news')->name('pending-news');
+            Route::get('/verified-news','verified_news')->name('verified-news');
+
         });
     });
 

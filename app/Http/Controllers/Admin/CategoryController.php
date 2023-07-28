@@ -22,7 +22,7 @@ class CategoryController extends Controller
         }
         $categories = $this->category->when($request->has('search'),function($query)use($request){
             return $query->where('name','LIKE','%'.$request->search.'%');
-        })->where('position',0)->paginate(15)->appends($query_peram);
+        })->where('position',1)->paginate(15)->appends($query_peram);
         return view('admin.category.index',compact('categories'));
     }
     public function sotre(Request $request){

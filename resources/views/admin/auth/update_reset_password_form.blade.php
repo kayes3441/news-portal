@@ -6,8 +6,6 @@
     <meta charset="utf-8" />
     <title>Admin Login</title>
     <!-- Toastr -->
-    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/toastr.js/latest/css/toastr.min.css">
     @include('admin.include.style')
 </head>
 

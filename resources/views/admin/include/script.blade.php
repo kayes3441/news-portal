@@ -9,6 +9,8 @@
 <!-- apexcharts -->
 <script src="{{asset('/')}}admin/assets/libs/apexcharts/apexcharts.min.js"></script>
 
+<script src="{{asset('/admin/assets/plugins/sweet_alert/sweetalert2.js')}}"></script>
+
 <script src="{{asset('/')}}admin/assets/js/pages/dashboard.init.js"></script>
 
 @yield('js')
@@ -16,6 +18,22 @@
 <script src="{{asset('/')}}admin/assets/js/app.js"></script>
 
 <script>
+    function route_alert(route, message) {
+        Swal.fire({
+        title: 'Are you sure?',
+        text: message,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#c71d1d',
+        cancelButtonColor: '#000',
+        confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                location.href = route;
+            }
+        })
+
+    }
     @if(Session::has('message.success'))
     let success_message = "{{ Session::get('message.success') }}";
         Command: toastr["success"](success_message);

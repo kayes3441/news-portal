@@ -23,8 +23,15 @@ class NewsController extends Controller
     ){
 
     }
-    public function index(){
-        return view('admin.news.index');
+    public function index(Request $request){
+        $query_peram = [];
+        if($request->has('search')){
+            $query_peram = $request->search;
+        }
+        $all_news = $this->news->when($request->has('search'),function($query)use($request){
+            return $query->where('title','LIKE','%'.$request->search.'%');
+        })->where('news_cover_by',auth('admins')->user()->name)->paginate(15)->appends($query_peram);
+        return view('admin.news.index',compact('all_news'));
     }
     public function add_news(){
         $categories =  $this->category->where(['parent_id'=>0,'status'=>1])->get();

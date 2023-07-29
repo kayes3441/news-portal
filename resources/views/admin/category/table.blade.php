@@ -25,8 +25,8 @@
                             <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit">
                                 <a href="#" class="btn btn-sm btn-soft-info"><i class="mdi mdi-pencil-outline"></i></a>
                             </li>
-                            <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete">
-                                <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
+                            <li data-bs-toggle="tooltip"  aria-label="Delete">
+                                <a href="javascript:void(0)" onclick="route_alert('{{route('admin.category.delete',['id'=>$category->id]) }}','category will be deleted')" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
                             </li>
                         </ul>
                     </td>

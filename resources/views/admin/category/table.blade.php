@@ -17,7 +17,7 @@
                     <td>{{$category['priority']}}</td>
                     <td>
                         <div class="form-check form-switch d-flex justify-content-center">
-                            <input class="form-check-input" type="checkbox" onchange="change_status()" id="status_check" {{$category['status'] == 1 ? 'checked' : ''}}>
+                            <input class="form-check-input" type="checkbox" onchange="change_status('{{$category->id}}','{{$category->status}}')" {{$category['status'] == 1 ? 'checked' : ''}}>
                         </div>
                     </td>
                     <td >

@@ -53,4 +53,15 @@ class CategoryController extends Controller
         $this->category->where('id',$request->id)->delete();
         return redirect()->back()->with('message.success','Category Deleted Successfully');
     }
+
+    public function status_update(Request $request){
+        $categrory = $this->category->find($request->id);
+        $categrory->status = $request['status'];
+
+
+        // $this->category->where(['id' => $request['id']])->update(['status' => $request['status']]);
+        return response()->json([
+            'success' => 1,
+        ], 200);
+    }
 }

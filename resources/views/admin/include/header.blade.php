@@ -5,19 +5,19 @@
             <div class="navbar-brand-box">
                 <a href="index.html" class="logo logo-dark">
                     <span class="logo-sm">
-                        <img src="{{asset('/')}}admin/assets/images/logo.svg" alt="" height="22">
+                        <img src="{{asset('public/admin/assets/images/logo.svg')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('/')}}admin/assets/images/logo-dark.png" alt="" height="17">
+                        <img src="{{asset('public/admin/assets/images/logo-dark.png')}}" alt="" height="17">
                     </span>
                 </a>
 
                 <a href="index.html" class="logo logo-light">
                     <span class="logo-sm">
-                        <img src="{{asset('/')}}admin/assets/images/logo-light.svg" alt="" height="22">
+                        <img src="{{asset('public/admin/assets/images/logo-light.svg')}}" alt="" height="22">
                     </span>
                     <span class="logo-lg">
-                        <img src="{{asset('/')}}admin/assets/images/logo-light.png" alt="" height="19">
+                        <img src="{{asset('public/admin/assets/images/logo-light.pn')}}g" alt="" height="19">
                     </span>
                 </a>
             </div>
@@ -44,7 +44,7 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{asset('/')}}admin/assets/images/users/avatar-1.jpg"
+                    <img class="rounded-circle header-profile-user" src="{{asset('public/admin/assets/images/users/avatar-1.jpg')}}"
                          alt="Header Avatar">
                     <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>

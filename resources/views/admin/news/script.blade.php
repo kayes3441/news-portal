@@ -1,5 +1,5 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-<script src="{{asset('/')}}admin/assets/js/spartan-multi-image-picker.js"></script>
+<script src="{{asset('public/admin/assets/js/spartan-multi-image-picker.js')}}"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <script src="https://unpkg.com/@yaireo/tagify"></script>
 <script src="https://unpkg.com/@yaireo/tagify@3.1.0/dist/tagify.polyfills.min.js"></script>
@@ -37,7 +37,7 @@
             groupClassName: 'col-md-4',
             maxFileSize: '',
             placeholderImage: {
-                image: "{{asset('/')}}admin/assets/images/placeholder-image-1.png",
+                image: "{{asset('public/admin/assets/images/placeholder-image-1.png')}}",
                 width: '100%'
             },
             dropFileLabel: "drop_here",

@@ -87,7 +87,13 @@ class NewsController extends Controller
             'news_id'       =>'required',
         ]);
         if ($validator->fails()){
+
             return back()->withErrors($validator)->withInput();
+        }
+        $exist = $this->news_type->where(['type' => $request->type,'news_id'=>$request->news_id])->first();
+        
+        if($exist){
+            return redirect()->back()->with('message.wranning','Already Added');
         }
         DB::table('news_types')->insertGetId([
             'type' => $request->type,
@@ -123,15 +129,40 @@ class NewsController extends Controller
         return view ('admin.news-type.feature-news',compact('all_news','feature_news'));
     }
 
+    public function news_type_status_update(Request $request){
+        $this->news_type->where(['id' => $request['id']])->update(['status' => $request['status']]);
+        return response()->json([
+            'success' => 1,
+        ], 200);
+    }
+    public function news_type_delete(Request $request){
+        $this->news_type->where(['id' => $request['id']])->delete();
+        return redirect()->back()->with('message.info','Successfully Deleted');
+    }
+
+
     public function pending_news(Request $request){
         $query_peram = [];
         if($request->has('search')){
             $query_peram = $request->search;
         }
         $pending_news = $this->news->when($request->has('search'),function($query)use($request){
-            return $query->where('name','LIKE','%'.$request->search.'%');
+            return $query->where('title','LIKE','%'.$request->search.'%');
         })->where('status',0)->latest()->paginate(15)->appends($query_peram);
         return view ('admin.news-verification.pending-news',compact('pending_news'));
+    }
+    public function pending_news_check(Request $request){
+        $news = $this->news->with('tags')->where('id',$request->id)->first();
+        return view('admin.news-verification.news-check',compact('news'));
+    }
+    public function verify(Request $request){
+        $this->news->where('id',$request->id)->update(['status'=>1]);
+        return redirect('admin/news/pending-news');
+    }
+    public function delete(Request $request){
+        $this->news->where('id',$request->id)->delete();
+        $this->news_type->where(['news_id' => $request['id']])->delete();
+        return redirect('admin/news/pending-news')->with('message.info','Successfully Deleted');
     }
     public function verified_news(Request $request){
         $query_peram = [];
@@ -139,7 +170,7 @@ class NewsController extends Controller
             $query_peram = $request->search;
         }
         $verified_news = $this->news->when($request->has('search'),function($query)use($request){
-            return $query->where('name','LIKE','%'.$request->search.'%');
+            return $query->where('title','LIKE','%'.$request->search.'%');
         })->where('status',1)->latest()->paginate(15)->appends($query_peram);
         return view ('admin.news-verification.verified-news',compact('verified_news'));
     }

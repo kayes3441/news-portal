@@ -56,7 +56,7 @@
                             </div>
                         </div>
                         <div class="col-xl-4 text-center mt-lg-5">
-                            <img id="sub_catgory_image" src="{{asset('/')}}admin/assets/images/placeholder-image.png" height="160px" width="160px" alt="your image"  />
+                            <img id="sub_catgory_image" src="{{asset('/admin/assets/images/placeholder-image.png')}}" height="160px" width="160px" alt="your image"  />
                         </div>
                         <div class="col-lg-12 d-flex justify-content-end mt-4">
                             <button type="submit" class="btn btn-primary w-md mx-2"><i class="fa fa-save"></i> Add Sub Category </button>

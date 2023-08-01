@@ -14,13 +14,13 @@
                 <td>{{$news_type->news->title}}</td>
                 <td>
                     <div class="form-check form-switch d-flex justify-content-center">
-                        <input class="form-check-input" type="checkbox" onchange="change_status()" id="status_check" {{$news_type->status == 1 ? 'checked':''}}>
+                        <input class="form-check-input change_status" type="checkbox" id="{{$news_type->id}}" {{$news_type['status'] == 1 ? 'checked' : ''}}>
                     </div>
                 </td>
                 <td >
                     <ul class="list-unstyled hstack gap-1 mb-0 justify-content-center">
                         <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete">
-                            <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
+                            <a href="#jobDelete" onclick="route_alert('{{route('admin.news.news-type-delete',['id'=>$news_type->id]) }}','{{$news_type->type}} news will be deleted')"  data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
                         </li>
                     </ul>
                 </td>

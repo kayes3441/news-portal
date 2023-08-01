@@ -1,23 +1,12 @@
 <script>
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-            $('#catgory_image').attr('src', e.target.result).width(160).height(160);
-            };
-
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $(document).on('change', '.change_status', function () {
+     $(document).on('change', '.change_status', function () {
         var id = $(this).attr("id");
         if ($(this).prop("checked") == true) {
             var status = 1;
         } else if ($(this).prop("checked") == false) {
             var status = 0;
         }
-        $.get("{{route('admin.category.status-update')}}",{id:id,status:status},(response)=>{
+        $.get("{{route('admin.news.news-type-status-update')}}",{id:id,status:status},(response)=>{
         }).then((response)=>{
             if(response.success == 1){
                 toastr.success("Status Updated Successfully");
@@ -29,7 +18,3 @@
 
     })
 </script>
-
-
-
-

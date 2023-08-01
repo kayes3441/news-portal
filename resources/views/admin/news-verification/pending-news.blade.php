@@ -10,8 +10,8 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title text-nowrap px-1">Pending News ({{$pending_news->count()}})</h4>
-                        <form class="ml-auto" action="{{route('admin.category.index')}}" method="get">
+                        <h4 class="card-title text-nowrap px-1">Pending News ({{$pending_news->total()}})</h4>
+                        <form class="ml-auto" action="{{route('admin.news.pending-news')}}" method="get">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="search" value="{{request('search')}}" id="inputGroupFile02">
                                 <button type="submit" class="input-group-text" for="inputGroupFile02">Serach</button>
@@ -32,15 +32,15 @@
                                 @foreach ($pending_news as $key=>$news)
                                     <tr>
                                         <td>{{$pending_news->firstItem()+$key}}</td>
-                                        <td>{{$news->news_cover_by}}y</td>
+                                        <td>{{$news->news_cover_by}}</td>
                                         <td>{{$news->title}}</td>
                                         <td>
                                             <ul class="list-unstyled hstack gap-1 mb-0 justify-content-center">
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete">
-                                                    <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-success"><i class="mdi mdi-read">Verify</i></a>
+                                                    <a href="{{route('admin.news.pending-news-check',['id'=>$news->id])}}" class="btn btn-sm btn-soft-success"><i class="mdi mdi-read">Verify</i></a>
                                                 </li>
                                                 <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete">
-                                                    <a href="#jobDelete" data-bs-toggle="modal" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
+                                                    <a href="#jobDelete" onclick="route_alert('{{route('admin.news.delete',['id'=>$news->id])}}','News will be deleted')" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>
                                                 </li>
                                             </ul>
                                         </td>
@@ -49,6 +49,9 @@
                             </tbody>
                         </table>
                     </div>
+                    <div class="mt-4 d-flex justify-content-center">
+                        {!!$pending_news->links()!!}
+                   </div>
                 </div>
             </div>
         </div>

@@ -39,7 +39,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="card-title">Feature News ({{$feature_news->count()}})</h4>
+                        <h4 class="card-title">Feature News ({{$feature_news->total()}})</h4>
                         <form class="ml-auto" action="{{route('admin.news.feature-news')}}" method="get">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="search" value="{{request('search')}}" >
@@ -59,4 +59,4 @@
     </div>
 @endsection
 
-{{-- @section('js')@include('admin.category.script')@endsection --}}
+@section('js')@include('admin.news-type.script')@endsection

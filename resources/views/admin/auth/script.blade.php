@@ -1,4 +1,4 @@
-<script src="{{asset('/')}}admin/assets/js/toastr.js"></script>
+<script src="{{asset('public/admin/assets/js/toastr.js')}}"></script>
 
 <script>
     $('#submit_form form').submit(function (e){

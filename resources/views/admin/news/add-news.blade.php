@@ -75,7 +75,7 @@
                             </div>
                         </div>
                         <div class="mb-3 d-flex justify-content-center">
-                            <img id="thumbnail_image" src="{{asset('/')}}admin/assets/images/placeholder-image-1.png" height="160px" width="300px" alt="your image"  />
+                            <img id="thumbnail_image" src="{{asset('public/admin/assets/images/placeholder-image-1.png')}}" height="160px" width="300px" alt="your image"  />
                         </div>
                         <div class="mb-3 d-flex justify-content-center">
                             <div class="text-muted">File Type : jpg jpeg png Maximum Size: 2MB</div>

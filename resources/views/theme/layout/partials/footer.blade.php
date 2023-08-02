@@ -17,45 +17,33 @@
         <div class="col-lg-3 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Categories</h4>
             <div class="d-flex flex-wrap m-n1">
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Entertainment</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Lifestyle</a>
+                @foreach ($categories as $category)
+                    <a href="" class="btn btn-sm btn-outline-secondary m-1">{{$category->name}}</a>
+                @endforeach
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5">
+        <div class="col-lg-2 col-md-6 mb-5">
             <h4 class="font-weight-bold mb-4">Tags</h4>
             <div class="d-flex flex-wrap m-n1">
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Politics</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Business</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Corporate</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Sports</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Health</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Education</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Science</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Technology</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Foods</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Entertainment</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Travel</a>
-                <a href="" class="btn btn-sm btn-outline-secondary m-1">Lifestyle</a>
+                @foreach ($tags as $tag)
+                    <div class="btn btn-sm btn-outline-secondary m-1">{{$tag->tags}}</div>
+                @endforeach
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 mb-5">
-            <h4 class="font-weight-bold mb-4">Quick Links</h4>
-            <div class="d-flex flex-column justify-content-start">
-                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>About</a>
-                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Advertise</a>
-                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Privacy & policy</a>
-                <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Terms & conditions</a>
-                <a class="text-secondary" href="#"><i class="fa fa-angle-right text-dark mr-2"></i>Contact</a>
+        <div class="col-lg-4 col-md-6">
+            <div class="pb-3">
+                <div class="bg-light py-2 ">
+                    <h3 class="m-0">Newsletter</h3>
+                </div>
+                <div class="bg-light text-center">
+                    <div class="input-group" style="width: 100%;">
+                        <input type="text" class="form-control form-control-lg" placeholder="Your Email">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary">Submit</button>
+                        </div>
+                    </div>
+                    <small>Be The First One To Know Our News</small>
+                </div>
             </div>
         </div>
     </div>
@@ -65,7 +53,7 @@
         &copy; <a class="font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved.
 
         <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
-        Designed by <a class="font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+        Designed by <a class="font-weight-bold" href="https://news.com">News</a>
     </p>
 </div>
 <!-- Footer End -->

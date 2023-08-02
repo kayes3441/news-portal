@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
+    protected $fillable = [
+
+    ];
     use HasFactory;
 
     public function tags(){
         return $this->hasMany(Tag::class,'news_id');
+    }
+    public function category(){
+        return $this->belongsTo(Category::class);
     }
 }

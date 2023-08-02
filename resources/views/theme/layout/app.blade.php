@@ -23,6 +23,7 @@
 
     @yield('css')
     <!-- Customized Bootstrap Stylesheet -->
+    <link href="{{asset('public/theme/assets/css/custom.css')}}" rel="stylesheet">
     <link href="{{asset('public/theme/assets/css/style.css')}}" rel="stylesheet">
 </head>
 

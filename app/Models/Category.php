@@ -26,5 +26,8 @@ class Category extends Model
     {
         return $this->hasMany(Category::class, 'parent_id')->orderBy('priority','asc');
     }
-
+    public function news()
+    {
+        return $this->hasMany(News::class, 'category_id')->orderBy('id','desc');
+    }
 }

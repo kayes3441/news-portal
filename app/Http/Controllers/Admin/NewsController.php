@@ -54,31 +54,40 @@ class NewsController extends Controller
          if($request->has('thumbnail')){
              $thumbnail = ImageManager::upload('news/','png',$request->file('thumbnail'));
          }
-         $images = [];
-        foreach ($request->file('images') as $img) {
-            $images[] = ImageManager::upload('news/','png',$img);
-        }
 
+        $images = [];
+        if($request->has('images')){
+            foreach ($request->file('images') as $img) {
+                $images[] = ImageManager::upload('news/','png',$img);
+            }
+        }
 
         $news_id = DB::table('news')->insertGetId([
             'title'         => $request->title,
             'category_id'   => $request->category_id,
             'description'   => $request->description,
-            'video'     => $request->video_url,
+            'video'         => $request->video_url,
             'thumbnail'     => $thumbnail,
             'images'        => json_encode($images),
             'news_cover_by' => $user,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         $tags =[];
-        foreach(json_decode($request->tags) as $key=>$value){
-            $tags[$key] = $value->value;
+        if($request->has('tags')){
+            foreach(json_decode($request->tags) as $key=>$value){
+                $tags[$key] = $value->value;
+            }
+            foreach($tags as $tag){
+                DB::table('tags')->insert([
+                    'news_id' => $news_id,
+                    'tags' => $tag,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
         }
-        foreach($tags as $tag){
-            DB::table('tags')->insert([
-                'news_id' => $news_id,
-                'tags' => $tag,
-            ]);
-        }
+
         return redirect()->back()->with('message.success','News Add Successfully');
     }
 
@@ -91,13 +100,15 @@ class NewsController extends Controller
             return back()->withErrors($validator)->withInput();
         }
         $exist = $this->news_type->where(['type' => $request->type,'news_id'=>$request->news_id])->first();
-        
+
         if($exist){
             return redirect()->back()->with('message.wranning','Already Added');
         }
         DB::table('news_types')->insertGetId([
             'type' => $request->type,
             'news_id'=>$request->news_id,
+            'created_at' => now(),
+            'updated_at' => now()
         ]);
         return redirect()->back()->with('message.success','Added Successfully');
     }

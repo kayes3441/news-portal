@@ -18,4 +18,8 @@ class News extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     }
+    public function news_type(){
+        return $this->hasMany(NewsType::class,'news_id');
+    }
+
 }

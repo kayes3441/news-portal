@@ -3,22 +3,9 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index.html" class="logo logo-dark">
-                    <span class="logo-sm">
-                        <img src="{{asset('public/admin/assets/images/logo.svg')}}" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{asset('public/admin/assets/images/logo-dark.png')}}" alt="" height="17">
-                    </span>
-                </a>
-
-                <a href="index.html" class="logo logo-light">
-                    <span class="logo-sm">
-                        <img src="{{asset('public/admin/assets/images/logo-light.svg')}}" alt="" height="22">
-                    </span>
-                    <span class="logo-lg">
-                        <img src="{{asset('public/admin/assets/images/logo-light.pn')}}g" alt="" height="19">
-                    </span>
+                <a href="{{route('admin.dashboard')}}" class="d-flex justify-content-center mt-3">
+                    <span><h3 class="text-black">News</h3></span>
+                    <span><h3 class="text-danger">Room</h3></span>
                 </a>
             </div>
 
@@ -44,9 +31,9 @@
             <div class="dropdown d-inline-block">
                 <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <img class="rounded-circle header-profile-user" src="{{asset('public/admin/assets/images/users/avatar-1.jpg')}}"
-                         alt="Header Avatar">
-                    <span class="d-none d-xl-inline-block ms-1" key="t-henry">Henry</span>
+                    {{-- <img class="rounded-circle header-profile-user" src="{{asset('public/admin/assets/images/users/avatar-1.jpg')}}"
+                         alt="Header Avatar"> --}}
+                    <span class="d-none d-xl-inline-block ms-1" key="t-henry">{{auth('admins')->user()->name;}}</span>
                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-end">

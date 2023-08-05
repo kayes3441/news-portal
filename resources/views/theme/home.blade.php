@@ -4,7 +4,6 @@
 @include('theme.partials._top-news-slider')
 <!-- Top News Slider End -->
 
-
 <!-- Main News Slider Start -->
 <div class="container-fluid py-3">
     <div class="container">
@@ -39,20 +38,16 @@
                             </a>
                         </div>
                     @endforeach
-
                 </div>
-
             </div>
         </div>
     </div>
 </div>
 <!-- Main News Slider End -->
 
-
 <!-- Featured News Slider Start -->
 @include('theme.partials._featured-news')
 <!-- Featured News Slider End -->
-
 
 <!-- Category News Slider Start -->
 <div class="container-fluid">
@@ -125,7 +120,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="d-flex align-items-center justify-content-between bg-light py-2 px-4 mb-3">
-                            <h3 class="m-0">trending</h3>
+                            <h3 class="m-0">Trending</h3>
                             <a class="text-secondary font-weight-medium text-decoration-none" href="{{route('all-news',['data_from'=>'trending'])}}">View All</a>
                         </div>
                     </div>

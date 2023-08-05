@@ -12,18 +12,29 @@
 </div>
 @endsection
 @section('body')
-    <div class="d-flex justify-content-end mb-3">
+    <div class="d-flex justify-content-start mb-3">
         <a href="{{route('admin.news.add-news')}}" class="btn btn-primary"> Add News </a>
     </div>
     <div class="row">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Post Table</h4>
-                    {{--                        <h6 class="text-success text-center">{{Session::get('message')}}</h6>--}}
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4 class="card-title">News ({{$all_news->total()}})</h4>
+                        <form class="ml-auto" action="{{route('admin.news.index')}}" method="get">
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control" name="search" value="{{request('search')}}" id="inputGroupFile02">
+                                <button type="submit" class="input-group-text" for="inputGroupFile02">Serach</button>
+                              </div>
+                        </form>
+                    </div>
+
                     @include('admin.news.table')
                 </div>
             </div>
+            <div class="mt-4 d-flex justify-content-center">
+                {!!$all_news->links()!!}
+           </div>
         </div>
     </div>
 

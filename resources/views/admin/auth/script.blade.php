@@ -8,7 +8,7 @@
             url     : $(this).attr('action'),
             data    : $('#form').serialize(),
             success:function (response) {
-                console.log(response)
+                // console.log(response)
                 if (response.success == true) {
                     $('#submit_form form')[0].reset()
                     Command: toastr["success"]("Ok", "Successfully Login")

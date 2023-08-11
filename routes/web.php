@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\AllNewsController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\NewsDetailsController;
@@ -16,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::group(['namespace'=>'web'],function (){
+    Route::post('registration',[UserController::class,'registration'])->name('registration');
+    Route::post('login',[UserController::class,'login'])->name('login');
+    Route::get('logout',[UserController::class,'logout'])->name('logout');
     Route::get('/',[HomeController::class,'home'])->name('home');
     Route::get('/details/{id}',[NewsDetailsController::class,'news_details'])->name('details');
     Route::get('/all-news',[AllNewsController::class,'all_news'])->name('all-news');

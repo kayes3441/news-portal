@@ -76,8 +76,6 @@ class AdminController extends Controller
         if($email == null ){
             return 'Linked Expired !!'. url('/admin/login-form');
         }
-//         return $email;
-//         $admin = Admin::find($email);
          return view('admin.auth.update_reset_password_form',compact('email','token'));
     }
 
@@ -101,6 +99,5 @@ class AdminController extends Controller
             return response()->json(['success'=>true ,'message'=>'Password Reset Successfully']);
         }
      //   return response()->json(['success'=>true ,'message'=>'Password Reset Successfully']);
-
     }
 }

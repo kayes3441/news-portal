@@ -25,7 +25,7 @@ class UserProfilController extends Controller
         $trending_news = NewsType::with(['news.category'])->where(['type'=>'trending','status'=>1])->inRandomOrder()->take(12)->get();
         $categories = $this->category->where(['parent_id'=>0,'status'=> 1])->inRandomOrder()->take(12)->get();
         $tags = $this->tag->take('12')->get();
-        $saved_news = $this->saved_news->with('news')->orderBy('id','desc')->paginate(20);
+        $saved_news = $this->saved_news->with('news')->where('user_id',auth('users')->id())->orderBy('id','desc')->paginate(20);
         return view('theme.profile.saved-news',compact('trending_news','categories','tags','saved_news'));
     }
     public function delete_saved_news(Request $request){

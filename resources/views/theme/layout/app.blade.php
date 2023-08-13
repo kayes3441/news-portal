@@ -55,7 +55,7 @@
     <!-- Template Javascript -->
     <script src="{{asset('public/theme/assets/js/main.js')}}"></script>
 
-    @yield('script')
+    @stack('script')
 
 <script>
     function route_alert(route, message) {

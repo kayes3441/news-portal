@@ -36,12 +36,15 @@
                     <h3 class="m-0">Newsletter</h3>
                 </div>
                 <div class="bg-light text-center">
-                    <div class="input-group" style="width: 100%;">
-                        <input type="text" class="form-control form-control-lg" placeholder="Your Email">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary">Submit</button>
+                    <form action="{{route('newslatter')}}" method="post" >
+                        @csrf
+                        <div class="input-group" style="width: 100%;">
+                            <input type="text" class="form-control form-control-lg" name="email" placeholder="Your Email">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary">Submit</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                     <small>Be The First One To Know Our News</small>
                 </div>
             </div>

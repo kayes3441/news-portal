@@ -44,7 +44,7 @@
             <div class="collapse navbar-collapse justify-content-between px-0 px-lg-3" id="navbarCollapse">
                 <div class="navbar-nav mr-auto py-0">
                     <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact</a>
+                    <a href="{{route('contact-us')}}" class="nav-item nav-link">Contact</a>
                 </div>
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
                     <input type="text" class="form-control" placeholder="Keyword">
@@ -153,59 +153,35 @@
         </div>
     </div>
 
-<script>
-    function passowrd(){
-        let length_password = document.getElementById('password').value.length;
-        if(length_password<8){
-            $('.passoword').addClass('text-danger')
-            $('.passoword').empty().html('Password Must 7 + Character');
-        }
-        else{
-            $('.passoword').addClass('d-none');
-        }
-    }
-    function passowrd_match(){
-        let password = document.getElementById('password').value;
-        let confirm_password = document.getElementById('confirm_password').value;
-        if(passowrd.length == null){
-            $('.match_passoword').addClass('d-none')
-        }else{
-            $('.match_passoword').removeClass('d-none')
-        }
-        if(password == confirm_password){
-            $('.match_passoword').addClass('text-success')
-            $('.match_passoword').removeClass('text-danger')
-            $('.match_passoword').empty().html('Password Match');
-        }else{
-            $('.match_passoword').removeClass('text-success')
-            $('.match_passoword').addClass('text-danger')
-            $('.match_passoword').empty().html('Password Not Match');
-        }
-    }
-    $('#registration_form').on('submit',function(e){
-        e.preventDefault();
-        $.post({
-            method:$(this).attr('method'),
-            url:$(this).attr('action'),
-            data:$(this).serialize(),
-            success:function (response){
-                setTimeout(function() {
-                        window.location.href = "{{url('/')}}";
-                    }, 1000);
+@push('script')
+    <script>
+        function passowrd(){
+            let length_password = document.getElementById('password').value.length;
+            if(length_password<8){
+                $('.passoword').addClass('text-danger')
+                $('.passoword').empty().html('Password Must 7 + Character');
             }
-        })
-    })
-    $('#login_form').on('submit',function(e){
-        e.preventDefault();
-        $.post({
-            method:$(this).attr('method'),
-            url:$(this).attr('action'),
-            data:$(this).serialize(),
-            success:function (response){
-            setTimeout(function() {
-                    window.location.href = "{{url('/')}}";
-                }, 1000);
+            else{
+                $('.passoword').addClass('d-none');
             }
-        })
-    })
-</script>
+        }
+        function passowrd_match(){
+            let password = document.getElementById('password').value;
+            let confirm_password = document.getElementById('confirm_password').value;
+            if(confirm_password.length == null){
+                $('.match_passoword').addClass('d-none')
+            }else{
+                $('.match_passoword').removeClass('d-none')
+            }
+            if(password == confirm_password){
+                $('.match_passoword').addClass('text-success')
+                $('.match_passoword').removeClass('text-danger')
+                $('.match_passoword').empty().html('Password Match');
+            }else{
+                $('.match_passoword').removeClass('text-success')
+                $('.match_passoword').addClass('text-danger')
+                $('.match_passoword').empty().html('Password Not Match');
+            }
+        }
+    </script>
+@endpush

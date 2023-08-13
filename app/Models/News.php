@@ -21,5 +21,8 @@ class News extends Model
     public function news_type(){
         return $this->hasMany(NewsType::class,'news_id');
     }
+    public function comment(){
+        return $this->hasMany(Comment::class,'news_id')->where('comment_reply_id','=',null);
+    }
 
 }

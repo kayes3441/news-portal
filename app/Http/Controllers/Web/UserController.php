@@ -44,7 +44,6 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => $request->password,
         ];
-        //return response()->json(request()->all());
         if (Auth::guard('users')->attempt($credentials))
         {
             return redirect()->back()->with('message.success','Successfully Login');

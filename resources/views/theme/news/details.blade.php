@@ -31,10 +31,29 @@
                     </div>
                     {{-- <img clas  s="img-fluid w-100" src="{{asset('storage/app/public/news')}}/{{$news['thumbnail']}}" style="object-fit: cover;"> --}}
                     <div class="overlay position-relative bg-light">
-                        <div class="mb-3">
-                            <a href="{{route('all-news',['data_from'=>'category','id'=>$news->category['id']])}}">{{$news->category->name}}</a>
-                            <span class="px-1">/</span>
-                            <span>{{date('M d, Y',strtotime($news->created_at))}}</span>
+                        <div class="d-flex mb-3">
+                            <div class="mt-1">
+                                <a href="{{route('all-news',['data_from'=>'category','id'=>$news->category['id']])}}">{{$news->category->name}}</a>
+                                <span class="px-1">/</span>
+                                <span>{{date('M d, Y',strtotime($news->created_at))}}</span>
+
+                            </div>
+                            @if(auth('users')->check())
+                            @php($saved_news = App\Models\SavedNews::where(['news_id'=>$news->id,'user_id'=>auth('users')->id()])->first())
+                                <div class="mx-2">
+                                    <button class="btn btn-sm saved_news {{isset($saved_news)?'btn-warning':'' }}" onclick="addSavedNews('{{$news->id}}')">
+                                        <i class="bx bx-label"></i>
+                                        Save
+                                    </button>
+                                </div>
+                            @else
+                                <div class="mx-2">
+                                    <button class="btn btn-sm saved_news" data-bs-target="#log_in"  data-bs-toggle="modal">
+                                        <i class="bx bx-label"></i>
+                                        Save
+                                    </button>
+                                </div>
+                            @endif
                         </div>
                         <div>
                             <h3 class="mb-3">{{$news->title}}</h3>
@@ -44,71 +63,70 @@
                 </div>
                 <!-- News Detail End -->
 
+                {{-- @dd($news->comment); --}}
                 <!-- Comment List Start -->
                 <div class="bg-light mb-3" style="padding: 30px;">
-                    <h3 class="mb-4">3 Comments</h3>
+                    <h3 class="mb-4">{{$news->comment->count()}} Comments</h3>
+                    @foreach ($news->comment as $comment)
                     <div class="media mb-4">
-                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
                         <div class="media-body">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.
-                                Gubergren clita aliquyam consetetur sadipscing, at tempor amet ipsum diam tempor
-                                consetetur at sit.</p>
-                            <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                        </div>
-                    </div>
-                    <div class="media">
-                        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-                        <div class="media-body">
-                            <h6><a href="">John Doe</a> <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.
-                                Gubergren clita aliquyam consetetur sadipscing, at tempor amet ipsum diam tempor
-                                consetetur at sit.</p>
-                            <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                            <div class="media mt-4">
-                                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                                    style="width: 45px;">
-                                <div class="media-body">
-                                    <h6><a href="">John Doe</a> <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
-                                        labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
-                                        eirmod ipsum. Gubergren clita aliquyam consetetur sadipscing, at tempor amet
-                                        ipsum diam tempor consetetur at sit.</p>
-                                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
+                            <h6>{{$comment->user->f_name}}&nbsp{{$comment->user->l_name}}<small><i>&nbsp{{date('M d, Y',strtotime($comment->created_at))}}</i></small></h6>
+                            <p>{{$comment->comment}}</p>
+                            <form action="{{route('reply')}}" method="POST">
+                                @csrf
+                                <input type="text" name="user_id" value="{{auth('users')->id()}}" hidden>
+                                <input type="text" name="news_id" value="{{$news->id}}" hidden>
+                                <input type="text" name="comment_id" value="{{$comment->id}}" hidden>
+                                <textarea cols="30" rows="2" name="comment" class="form-control"></textarea>
+                                <button type="submit" class="btn btn-sm btn-outline-secondary mt-1">Reply</button>
+                            </form>
+                            @if($comment->reply->count() >0)
+                            @foreach ($comment->reply as $reply)
+                                <div class="media mt-2 mx-5">
+
+                                    <div class="media-body">
+                                        <h6>{{$reply->user->f_name}}&nbsp{{$reply->user->l_name}} <small><i>&nbsp{{date('M d, Y',strtotime($reply->created_at))}}</i></small></h6>
+                                        <p>{{$reply->comment}}</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
+                            @endif
+
+
                         </div>
                     </div>
+                    @endforeach
+
                 </div>
                 <!-- Comment List End -->
 
                 <!-- Comment Form Start -->
                 <div class="bg-light mb-3" style="padding: 30px;">
                     <h3 class="mb-4">Leave a comment</h3>
-                    <form>
+                    <form action="{{route('comment')}}" method="POST">
+                        @csrf
+                        <input type="text" name="user_id" value="{{auth('users')->id()}}" hidden>
+                        <input type="text" name="news_id" value="{{$news->id}}" hidden>
                         <div class="form-group">
-                            <label for="name">Name *</label>
-                            <input type="text" class="form-control" id="name">
+                            <label for="message">Comment *</label>
+                            <textarea cols="30" rows="5" name="comment" class="form-control"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email *</label>
-                            <input type="email" class="form-control" id="email">
-                        </div>
-                        <div class="form-group">
-                            <label for="website">Website</label>
-                            <input type="url" class="form-control" id="website">
-                        </div>
+                        @if (auth('users')->check())
+                            <div class="form-group mb-0">
+                                <button type="submit"
+                                    class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                    Leave a comment
+                                </button>
+                            </div>
+                        @else
+                            <div class="form-group mb-0">
+                                <a href="javascript:" data-bs-target="#log_in" data-bs-toggle="modal"
+                                    class="btn btn-primary font-weight-semi-bold py-2 px-3">
+                                    Leave a comment
+                                </a>
+                            </div>
+                        @endif
 
-                        <div class="form-group">
-                            <label for="message">Message *</label>
-                            <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                        </div>
-                        <div class="form-group mb-0">
-                            <input type="submit" value="Leave a comment"
-                                class="btn btn-primary font-weight-semi-bold py-2 px-3">
-                        </div>
                     </form>
                 </div>
                 <!-- Comment Form End -->
@@ -166,3 +184,60 @@
 </div>
 <!-- News With Sidebar End -->
 @endsection
+@push('script')
+<script>
+    function addSavedNews(news_id) {
+        // alert(news_id);
+        $.get("{{route('saved-news')}}",{news_id:news_id},(response)=>{
+            if (response.value == 1) {
+                $(`.saved_news`).addClass('btn-warning');
+                Command: toastr["success"](response.success);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }else {
+                $(`.saved_news`).removeClass('btn-warning');
+                Command: toastr["success"](response.error);
+                toastr.options = {
+                    "closeButton": false,
+                    "debug": false,
+                    "newestOnTop": false,
+                    "progressBar": false,
+                    "positionClass": "toast-bottom-right",
+                    "preventDuplicates": false,
+                    "onclick": null,
+                    "showDuration": "300",
+                    "hideDuration": "1000",
+                    "timeOut": "5000",
+                    "extendedTimeOut": "1000",
+                    "showEasing": "swing",
+                    "hideEasing": "linear",
+                    "showMethod": "fadeIn",
+                    "hideMethod": "fadeOut"
+                }
+            }
+        })
+        // $.get({url: '{{route('saved-news')}}',
+        //     news_id:news_id
+        //     success:function (response){
+
+        //     }
+        // });
+    }
+</script>
+
+@endpush

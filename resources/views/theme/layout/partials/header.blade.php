@@ -63,7 +63,7 @@
                     </a>
                     <div class="dropdown-menu rounded-0 m-0 ">
                         <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">Saved News</a>
+                        <a href="{{route('saved-news-list')}}" class="dropdown-item">Saved News</a>
                         <a href="{{route('logout')}}" class="dropdown-item">Logout</a>
                     </div>
                 </div>

@@ -18,7 +18,7 @@
                         @foreach ($saved_news as $key=>$news)
                             <tr>
                                 <td>1</td>
-                                <td>{{$news->news->title}}</td>
+                                <td>{{ isset($news->news) ? $news->news->title : 'news not fount'}}</td>
                                 <td>
                                     <a href="javascript:" onclick="route_alert('{{route('delete-saved-news',['id'=>$news->id])}}','Are you to remove saved news')" class="btn btn-sm btn btn-outline-danger">
                                         <i class="bx bx-trash">

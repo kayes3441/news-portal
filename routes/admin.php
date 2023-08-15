@@ -27,8 +27,8 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::group(['middleware'=>['module:category']], function () {
                 Route::get('/','index')->name('index');
                 Route::post('/store','store')->name('store');
-                Route::post('/edit/{id}','edit')->name('edit');
-                Route::post('/update/{id}','edit')->name('edit');
+                Route::get('/edit','edit')->name('edit');
+                Route::post('/update/{id}','update')->name('update');
                 Route::post('/status-update','status_update')->name('status_update');
                 Route::get('/delete','delete')->name('delete');
                 Route::get('/status-update','status_update')->name('status-update');

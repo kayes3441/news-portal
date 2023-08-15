@@ -45,8 +45,29 @@ class CategoryController extends Controller
 
        return redirect()->back()->with('message.success','Category Create Successfully');
     }
-    public function show(){
-
+    public function edit(Request $request){
+        $category = Category::where('id',$request->id)->first();
+        return view('admin.category.edit',compact('category'));
+    }
+    public function update(Request $request){
+        $category = Category::where('id',$request->id)->first();
+        $validator = Validator::make($request->all(),[
+            'name'       =>'required',
+            'priority'   => 'required',
+        ]);
+         if ($validator->fails()){
+             return back()->withErrors($validator)->withInput();
+         }
+         $image_name = "";
+         if($request->has('logo')){
+             $image_name = ImageManager::update('category/',$category->logo,'png',$request->file('logo'));
+         }
+        DB::table('categories')->where('id',$request->id)->update([
+            'name'     => $request->name,
+            'priority' => $request->priority,
+            'logo'     => $image_name,
+        ]);
+        return redirect('admin/category')->with('message.success','Category Update Successfully');
     }
 
     public function delete(Request $request){

@@ -3,7 +3,7 @@
         if (input.files && input.files[0]) {
             var reader = new FileReader();
             reader.onload = function (e) {
-            $('#catgory_image').attr('src', e.target.result).width(160).height(160);
+            $('#catgory_image').attr('src', e.target.result).width(300).height(90);
             };
 
             reader.readAsDataURL(input.files[0]);

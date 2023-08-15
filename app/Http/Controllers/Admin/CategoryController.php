@@ -25,7 +25,7 @@ class CategoryController extends Controller
         })->where('position',1)->paginate(15)->appends($query_peram);
         return view('admin.category.index',compact('categories'));
     }
-    public function sotre(Request $request){
+    public function store(Request $request){
        $validator = Validator::make($request->all(),[
            'name'       =>'required',
            'priority'   => 'required',

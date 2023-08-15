@@ -54,6 +54,16 @@
                         <li><a href="{{route('admin.news.verified-news')}}" key="t-tui-calendar">Verified News</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="bx bx-check-shield"></i>
+                        <span key="t-dashboards">Employee</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('admin.employee.index')}}" key="t-tui-calendar">Employee</a></li>
+                        {{-- <li><a href="{{route('admin.news.verified-news')}}" key="t-tui-calendar">Verified News</a></li> --}}
+                    </ul>
+                </li>
             </ul>
         </div>
         <!-- Sidebar -->

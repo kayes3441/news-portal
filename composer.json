@@ -22,9 +22,10 @@
     },
     "autoload": {
         "files": [
-            "app/CPU/image-manager.php"
+            "app/CPU/image-manager.php",
+            "app/CPU/helper.php"
 
-            
+
         ],
         "psr-4": {
             "App\\": "app/",

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\TagController;
@@ -23,14 +24,19 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
         Route::get('/logout',[AdminController::class,'logout'])->name('logout');
 
         Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function (){
-            Route::get('/','index')->name('index');
-            Route::post('/sotre','sotre')->name('store');
-            Route::post('/edit/{id}','edit')->name('edit');
-            Route::post('/update/{id}','edit')->name('edit');
-            Route::post('/status-update','status_update')->name('status_update');
-            Route::get('/delete','delete')->name('delete');
-            Route::get('/status-update','status_update')->name('status-update');
+            Route::group(['middleware'=>['module:category']], function () {
+                Route::get('/','index')->name('index');
+                Route::post('/store','store')->name('store');
+                Route::post('/edit/{id}','edit')->name('edit');
+                Route::post('/update/{id}','edit')->name('edit');
+                Route::post('/status-update','status_update')->name('status_update');
+                Route::get('/delete','delete')->name('delete');
+                Route::get('/status-update','status_update')->name('status-update');
+            });
+
         });
+
+
         Route::controller(SubCategoryController::class)->prefix('sub-category')->name('sub-category.')->group(function (){
             Route::get('/','index')->name('index');
             Route::post('/sotre','sotre')->name('store');
@@ -56,19 +62,35 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::any('/tag/create','create')->name('tag.create');
         });
         Route::controller(NewsController::class)->prefix('news')->name('news.')->group(function (){
+
             Route::get('/','index')->name('index');
             Route::get('/add-news','add_news')->name('add-news');
             Route::post('/store','sotre')->name('store');
-            Route::post('/news-type-store','news_type_store')->name('news-type-store');
-            Route::get('/trending-news','trending_news')->name('trending-news');
-            Route::get('/feature-news','feature_news')->name('feature-news');
-            Route::get('/news-type-status-update','news_type_status_update')->name('news-type-status-update');
-            Route::get('/news-type-delete','news_type_delete')->name('news-type-delete');
-            Route::get('/pending-news','pending_news')->name('pending-news');
-            Route::get('/pending-news-check','pending_news_check')->name('pending-news-check');
-            Route::get('/verify','verify')->name('verify');
-            Route::get('/delete','delete')->name('delete');
-            Route::get('/verified-news','verified_news')->name('verified-news');
+
+            Route::group(['middleware'=>['module:news_manage']], function () {
+                Route::post('/news-type-store','news_type_store')->name('news-type-store');
+                Route::get('/trending-news','trending_news')->name('trending-news');
+                Route::get('/feature-news','feature_news')->name('feature-news');
+                Route::get('/news-type-status-update','news_type_status_update')->name('news-type-status-update');
+                Route::get('/news-type-delete','news_type_delete')->name('news-type-delete');
+                Route::get('/pending-news','pending_news')->name('pending-news');
+                Route::get('/pending-news-check','pending_news_check')->name('pending-news-check');
+                Route::get('/verify','verify')->name('verify');
+                Route::get('/delete','delete')->name('delete');
+                Route::get('/verified-news','verified_news')->name('verified-news');
+            });
+
+        });
+        Route::controller(EmployeeController::class)->prefix('employee')->name('employee.')->group(function (){
+            Route::group(['middleware'=>['module:employee_manage']], function () {
+                Route::get('/','index')->name('index');
+                Route::post('/store','store')->name('store');
+                // Route::post('/edit/{id}','edit')->name('edit');
+                // Route::post('/update/{id}','edit')->name('edit');
+                // Route::post('/status-update','status_update')->name('status_update');
+                Route::get('/delete','delete')->name('delete');
+                // Route::get('/status-update','status_update')->name('status-update');
+            });
 
         });
     });

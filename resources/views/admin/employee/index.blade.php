@@ -45,12 +45,7 @@
                             </div>
                         </div>
                         <label class=" mb-3">Permission</label>
-                        <div class="col-sm-6 col-lg-3">
-                            <div class="form-group d-flex gap-2">
-                                <input type="checkbox" name="modules[]" value="dashboard" class="module-permission" id="dashboard">
-                                <label class="title-color mb-0" style=";" for="dashboard">Dashboard</label>
-                            </div>
-                        </div>
+                      
                         <div class="col-sm-6 col-lg-3">
                             <div class="form-group d-flex gap-2">
                                 <input type="checkbox" name="modules[]" value="category" id="pos_management">

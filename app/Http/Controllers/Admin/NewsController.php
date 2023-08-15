@@ -50,7 +50,7 @@ class NewsController extends Controller
         if ($validator->fails()){
             return back()->withErrors($validator)->withInput();
         }
-         $thumbnail = "";
+        $thumbnail = "";
          if($request->has('thumbnail')){
              $thumbnail = ImageManager::upload('news/','png',$request->file('thumbnail'));
          }
@@ -89,6 +89,67 @@ class NewsController extends Controller
         }
 
         return redirect()->back()->with('message.success','News Add Successfully');
+    }
+    public function edit(Request $request){
+        $news       = $this->news->with(['category','tags'])->where('id',$request->id)->first();
+        $categories =  $this->category->where(['parent_id'=>0,'status'=>1])->get();
+        return view('admin.news.edit',compact('news','categories'));
+    }
+    public function update(Request $request){
+        // dd($request->id);
+        $user = auth('admins')->user()->name;
+        $news   = $this->news->with(['category','tags'])->where('id',$request->id)->first();
+        $validator = Validator::make($request->all(),[
+            'title'       =>'required',
+            'category_id'   => 'required',
+            'description'   => 'required',
+        ]);
+
+        if ($validator->fails()){
+            return back()->withErrors($validator)->withInput();
+        }
+        $thumbnail = $news->thumbnail;
+         if($request->has('thumbnail')){
+            $thumbnail =  ImageManager::update('news/',$news->thumbnail,'png',$request->file('thumbnail'));
+         }
+
+        $images = json_decode($news->images);
+        if($request->has('images')){
+            foreach ($request->file('images') as $req_img) {
+                $images[] = ImageManager::upload('news/','png',$req_img);
+            }
+        }
+
+
+        DB::table('news')->where('id',$news->id)->update([
+            'title'         => $request->title,
+            'category_id'   => $request->category_id,
+            'description'   => $request->description,
+            'video'         => $request->video_url,
+            'thumbnail'     => $thumbnail,
+            'images'        => json_encode($images),
+            'updated_at' => now(),
+        ]);
+
+        // dd($request->tags);
+        if($request->has('tags')){
+            DB::table('tags')->where('news_id',$news->id)->delete();
+            $tags = [];
+            foreach(json_decode($request->tags) as $key=>$value){
+                $tags[$key] = $value->value;
+            }
+            // dd($tags);
+            foreach($tags as $tag){
+                DB::table('tags')->insert([
+                    'news_id' => $news->id,
+                    'tags' => $tag,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ]);
+            }
+        }
+        return redirect('admin/news')->with('message.success','Update Successfully');
+
     }
 
     public function news_type_store(Request $request){

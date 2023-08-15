@@ -25,7 +25,7 @@ Route::group(['namespace'=>'web'],function (){
     Route::get('logout',[UserController::class,'logout'])->name('logout')->middleware('user');
     Route::get('/',[HomeController::class,'home'])->name('home');
     Route::get('/details/{id}',[NewsDetailsController::class,'news_details'])->name('details');
-    Route::get('/all-news',[AllNewsController::class,'all_news'])->name('all-news');
+    Route::any('/all-news',[AllNewsController::class,'all_news'])->name('all-news');
     Route::any('saved-news',[NewsDetailsController::class,'store_saved_news'])->name('saved-news')->middleware('user');
     Route::any('saved-news-list',[UserProfilController::class,'saved_news_list'])->name('saved-news-list')->middleware('user');
     Route::any('delete-saved-news',[UserProfilController::class,'delete_saved_news'])->name('delete-saved-news')->middleware('user');

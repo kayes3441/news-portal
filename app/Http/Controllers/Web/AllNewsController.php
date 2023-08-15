@@ -40,6 +40,9 @@ class AllNewsController extends Controller
                     $sub_query->where('type', $request->data_from);
                 });
             })
+            ->when($request->has('data_from') && ($request->data_from == 'search' || $request->data_from == 'feature'), function ($query) use ($request) {
+                  return $query->where('title','LIKE','%'.$request->search.'%');
+            })
             ->where('status', 1)
             ->paginate(10, ['*'], 'page', $request->page)
             ->appends(['data_from' => $request->data_from]);

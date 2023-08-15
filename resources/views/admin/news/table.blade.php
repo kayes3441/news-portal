@@ -14,7 +14,7 @@
                 <td>
                     <ul class="list-unstyled hstack gap-1 mb-0 justify-content-center">
                         <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit">
-                            <a href="#" class="btn btn-sm btn-soft-info"><i class="mdi mdi-pencil-outline"></i></a>
+                            <a href="{{route('admin.news.edit',['id'=>$news->id])}}" class="btn btn-sm btn-soft-info"><i class="mdi mdi-pencil-outline"></i></a>
                         </li>
                         <li data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete">
                             <a href="#jobDelete" onclick="route_alert('{{route('admin.news.delete',['id'=>$news->id])}}','News will be deleted')" class="btn btn-sm btn-soft-danger"><i class="mdi mdi-delete-outline"></i></a>

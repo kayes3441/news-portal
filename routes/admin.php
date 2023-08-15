@@ -66,6 +66,8 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::get('/','index')->name('index');
             Route::get('/add-news','add_news')->name('add-news');
             Route::post('/store','sotre')->name('store');
+            Route::get('/edit','edit')->name('edit');
+            Route::post('/update/{id}','update')->name('update');
 
             Route::group(['middleware'=>['module:news_manage']], function () {
                 Route::post('/news-type-store','news_type_store')->name('news-type-store');

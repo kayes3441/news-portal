@@ -46,13 +46,18 @@
                     <a href="{{route('home')}}" class="nav-item nav-link active">Home</a>
                     <a href="{{route('contact-us')}}" class="nav-item nav-link">Contact</a>
                 </div>
+                <form action="{{route('all-news')}}" method="get">
+                    @csrf
                 <div class="input-group ml-auto" style="width: 100%; max-width: 300px;">
-                    <input type="text" class="form-control" placeholder="Keyword">
-                    <div class="input-group-append">
-                        <button class="input-group-text text-secondary"><i
-                                class="fa fa-search"></i></button>
-                    </div>
+                        <input name="data_from" value="search" hidden>
+                        <input type="text" class="form-control" name="search" value="{{request('search')}}" placeholder="Keyword">
+                        <div class="input-group-append">
+                            <button type="submit" class="input-group-text text-secondary"><i
+                                    class="fa fa-search"></i></button>
+                        </div>
+
                 </div>
+            </form>
 
                 @if(auth('users')->check())
                 <div class="nav-item dropdown show">

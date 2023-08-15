@@ -58,7 +58,7 @@ class CategoryController extends Controller
          if ($validator->fails()){
              return back()->withErrors($validator)->withInput();
          }
-         $image_name = "";
+         $image_name = $category->logo;
          if($request->has('logo')){
              $image_name = ImageManager::update('category/',$category->logo,'png',$request->file('logo'));
          }

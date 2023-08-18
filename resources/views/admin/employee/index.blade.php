@@ -26,14 +26,14 @@
                         <div class="col-xl-6 mb-3">
                             <label>Password</label>
                             <div>
-                                <input type="password" class="form-control" id="password" placeholder="Password" name="password" onkeyup="passowrd()" required="required" data-validation-required-message="Please enter your email" aria-invalid="false">
+                                <input type="password" class="form-control password" id="password" placeholder="Password" name="password" onkeyup="passowrd()" required="required" data-validation-required-message="Please enter your email" aria-invalid="false">
                                 <span class="passoword mt-1"></span>
                             </div>
                         </div>
                         <div class="col-xl-6 mb-3">
                             <label>Confirm Passowrd</label>
                             <div>
-                                <input type="password" class="form-control" placeholder="Confirm Passowrd" id="confirm_password" onkeyup="passowrd_match()" name="confirm_password" required="required" data-validation-required-message="Please enter your email" aria-invalid="false">
+                                <input type="password" class="form-control confirm_password" placeholder="Confirm Passowrd" id="confirm_password" onkeyup="passowrd_match()" name="confirm_password" required="required" data-validation-required-message="Please enter your email" aria-invalid="false">
                                 <span class="match_passoword mt-1"></span>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                         <label class=" mb-3">Permission</label>
-                      
+
                         <div class="col-sm-6 col-lg-3">
                             <div class="form-group d-flex gap-2">
                                 <input type="checkbox" name="modules[]" value="category" id="pos_management">

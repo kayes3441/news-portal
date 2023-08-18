@@ -24,9 +24,9 @@ class UserController extends Controller
             'f_name' => $request->f_name,
             'l_name' => $request->l_name,
             'email' => $request->email,
-            'password' =>bcrypt($request->passoword),
-            'created_at' =>now(),
-            'updated_at' =>now(),
+            'password' => bcrypt($request->password),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         return redirect()->back()->with('message.success','Registration Successfully complete');
     }

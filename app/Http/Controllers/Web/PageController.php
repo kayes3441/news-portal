@@ -46,7 +46,7 @@ class PageController extends Controller
         return redirect()->back()->with('message.success','Message Send Successfully');
     }
     public function newslatter(Request $request){
-        DB::table('newslatters')->insert([
+        DB::table('subscribers')->insert([
             'email'=>$request->email,
             'created_at' => now(),
             'updated_at' => now(),

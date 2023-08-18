@@ -1,10 +1,12 @@
 <?php
+use App\Http\Controllers\Admin\SubscriberController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\EmployeeController;
+use App\Http\Controllers\Admin\MessageController;
 use App\Http\Controllers\Admin\SubCategoryController;
 use App\Http\Controllers\Admin\SubSubCategoryController;
 use App\Http\Controllers\Admin\TagController;
@@ -21,6 +23,10 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
 
     Route::group(['middleware'=>'admin',],function (){
         Route::get('/dashboard',[AdminDashboardController::class,'index'])->name('dashboard');
+        Route::get('/message',[MessageController::class,'message'])->name('message');
+        Route::get('/message/delete',[MessageController::class,'delete'])->name('message.delete');
+        Route::get('/subscriber',[SubscriberController::class,'subscriber'])->name('subscriber');
+        Route::get('/subscriber/delete',[SubscriberController::class,'delete'])->name('subscriber.delete');
         Route::get('/logout',[AdminController::class,'logout'])->name('logout');
 
         Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function (){
@@ -87,11 +93,9 @@ Route::group(['namespace' => 'Admin','prefix'=>'admin','as'=>'admin.',],function
             Route::group(['middleware'=>['module:employee_manage']], function () {
                 Route::get('/','index')->name('index');
                 Route::post('/store','store')->name('store');
-                // Route::post('/edit/{id}','edit')->name('edit');
-                // Route::post('/update/{id}','edit')->name('edit');
-                // Route::post('/status-update','status_update')->name('status_update');
+                Route::get('/edit','edit')->name('edit');
+                Route::post('/update/{id}','update')->name('update');
                 Route::get('/delete','delete')->name('delete');
-                // Route::get('/status-update','status_update')->name('status-update');
             });
 
         });

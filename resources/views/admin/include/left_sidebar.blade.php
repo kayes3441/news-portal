@@ -14,6 +14,18 @@
                         <span key="t-dashboards">Dashboards</span>
                     </a>
                 </li>
+                <li>
+                    <a href="{{route('admin.message')}}" class="waves-effect">
+                        <i class="bx bx-message"></i>
+                        <span key="t-dashboards">Message</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('admin.subscriber')}}" class="waves-effect">
+                        <i class="bx bx-wrench"></i>
+                        <span key="t-dashboards">Subscriber</span>
+                    </a>
+                </li>
                 <li class="menu-title" key="t-apps">News Management</li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -56,7 +68,7 @@
                 </li>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="bx bx-check-shield"></i>
+                        <i class="bx bx-male"></i>
                         <span key="t-dashboards">Employee</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -64,6 +76,7 @@
                         {{-- <li><a href="{{route('admin.news.verified-news')}}" key="t-tui-calendar">Verified News</a></li> --}}
                     </ul>
                 </li>
+
             </ul>
         </div>
         <!-- Sidebar -->

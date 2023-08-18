@@ -32,7 +32,7 @@
                 <div class="category-overflow">
                     @foreach ($categories as $category)
                         <div class="position-relative overflow-hidden mb-3" style="height: 80px;">
-                            <img class="img-fluid w-100 h-100" src="{{asset('storage/app/public/news')}}/{{$category['logo']}}" style="object-fit: cover;">
+                            <img class="img-fluid w-100 h-100" src="{{asset('storage/app/public/category')}}/{{$category['logo']}}" style="object-fit: cover;">
                             <a href="{{route('all-news',['data_from'=>'category','id'=>$category['id']])}}" class="overlay align-items-center justify-content-center h4 m-0 text-white text-decoration-none">
                                 {{$category->name}}
                             </a>

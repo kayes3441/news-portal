@@ -70,7 +70,7 @@
                     @foreach ($news->comment as $comment)
                     <div class="media mb-4">
                         <div class="media-body">
-                            <h6>{{$comment->user->f_name}}&nbsp{{$comment->user->l_name}}<small><i>&nbsp{{date('M d, Y',strtotime($comment->created_at))}}</i></small></h6>
+                            <h6>{{isset($comment->user) ? $comment->user->f_name.' '.$comment->user->l_name : 'user not found'}}<small><i>&nbsp{{date('M d, Y',strtotime($comment->created_at))}}</i></small></h6>
                             <p>{{$comment->comment}}</p>
                             <form action="{{route('reply')}}" method="POST">
                                 @csrf
@@ -85,7 +85,7 @@
                                 <div class="media mt-2 mx-5">
 
                                     <div class="media-body">
-                                        <h6>{{$reply->user->f_name}}&nbsp{{$reply->user->l_name}} <small><i>&nbsp{{date('M d, Y',strtotime($reply->created_at))}}</i></small></h6>
+                                        <h6>{{isset($reply->user) ?$reply->user->f_name.' '.$reply->user->l_name : 'user not found'}} <small><i>&nbsp{{date('M d, Y',strtotime($reply->created_at))}}</i></small></h6>
                                         <p>{{$reply->comment}}</p>
                                     </div>
                                 </div>
